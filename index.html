@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In love si koya</title>
+    <style>
+        body {
+            background-color: #F7CFD8;
+        }
+        .container {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+            justify-self: center;
+            align-items: center;
+            background-color:#1679AB;
+            width: 500px;
+            height: 500px;
+            border-radius: 16px;
+            border: 1px solid #1679AB;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        .container-content {
+            padding: 10px;
+        }
+
+        .gif {
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+            padding: 10 0px;
+        }
+
+        .question {
+            font-family: sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            text-align:center;
+            padding: 10px;
+            color: #F7F9F2;
+        }
+
+        .buttons {
+            display: flex;
+            justify-items: center;
+            justify-self: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        button {
+            font-size: 17px;
+            padding: 0.5em 2em;
+            border: transparent;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            background: dodgerblue;
+            color: white;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, rgb(12, 126, 240) 0%, rgb(20, 66, 75) 100%);
+        }
+
+        button:active {
+            transform: translate(0em, 0.2em);
+        }
+        
+        .hi{
+            display: none;
+        }
+
+        .btn-welcome {
+            display: none;
+        }
+        @media (max-width: 600px) {
+            .buttons button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="container-content">
+                <div class="gif">
+                    <img alt="" id="img_display" width="300px" height="300px">
+                </div>
+                <div class="question">
+                    <p id="text"></p>
+                </div>
+                <div class="buttons">
+                    <button id="btn-yes">Yes</button>
+                    <button id="btn-no">No</button>
+                    <button id="Hi" class="hi">Hi!</button>
+                    <button id="btn-welcome" class="btn-welcome">Welcome!</button>
+                </div>    
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const img_display = document.getElementById('img_display');
+        let text = document.getElementById('text');
+        const btn_yes = document.getElementById('btn-yes');
+        const btn_no = document.getElementById('btn-no');
+        const btn_hi = document.getElementById('Hi');
+        const btn_welcome = document.getElementById('btn-welcome');
+
+        let Question1 = [
+            'Hello Ryj!',
+            'Will you be my date on sunday?',
+            'Are you sure?',
+            'Thank you Ryj!',
+            'Aww.. You are so sweet! '
+        ];
+
+        let gif_display = [
+            './img/kitty-hello.gif',
+            './img/kitty-love.gif',
+            './img/kitty-blushing.gif',
+            './img/kitty-blowing-kisses.gif',
+        ]
+
+        let mouseClick = 0;
+        let isclicked = true;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            btn_yes.style.display = 'none';
+            btn_no.style.display = 'none';
+            btn_hi.style.display = 'block';
+            text.innerHTML = Question1[0];
+            img_display.src = gif_display[0]
+            
+            btn_hi.addEventListener('click', () => {
+                btn_hi.style.display = 'none';
+                btn_yes.style.display = 'block';
+                btn_no.style.display = 'block';
+                text.innerHTML = Question1[1];
+                img_display.src = gif_display[1];
+            });
+
+            btn_yes.addEventListener('click', () => {
+                img_display.src = gif_display[2];
+                text.innerHTML = Question1[3];
+                btn_yes.style.display = 'none';
+                btn_no.style.display = 'none';
+                btn_welcome.style.display = 'block';
+            });
+
+            btn_welcome.addEventListener('click', () => {
+                img_display.src = gif_display[3];
+                text.innerHTML = Question1[4]
+                btn_welcome.style.display = 'none';
+            });
+    
+            btn_no.addEventListener('click', () => {
+                const container = document.querySelector('.container-content');
+                const containerWidth = container.offsetWidth;
+                const containerHeight = container.offsetHeight;
+                const btnWidth = btn_no.offsetWidth;
+                const btnHeight = btn_no.offsetHeight;
+
+                const randomLeft = Math.random() * (containerWidth - btnWidth);
+                const randomTop = Math.random() * (containerHeight - btnHeight);
+
+                btn_no.style.position = 'absolute';
+                btn_no.style.left = `${randomLeft}px`;
+                btn_no.style.top = `${randomTop}px`;
+            });
+        });
+
+    </script>
+</body>
+</html>
